@@ -1,4 +1,8 @@
 <div class="container">
   <h1 class="text-center">Welcome to Zhanna's Library</h1>
-  
+  <ul *ngIf="library != undefined" class="list-group">
+  <li *ngFor="let book of library" class="list-group-item list-group-item-success">
+  <app-book [book]="book"></app-book>
+  </li>
+  </ul>
 </div>

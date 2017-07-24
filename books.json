@@ -1,8 +1,8 @@
 [
-  {"Author": "Mark Twain", "Date": "1867", "Title": "The Celebrated Jumping Frog of Claveras County"},
-  {"Author": "Mark Twain", "Date": "1876", "Title": "The Adventures of Tom Sawyer"},
-  {"Author": "Mark Twain", "Date": "1882", "Title": "The Prince and the Pauper"},
-  {"Author": "Mark Twain", "Date": "1883", "Title": "Life on the Mississippi"},
-  {"Author": "Mark Twain", "Date": "1884", "Title": "Adventures of Huckleberry Finn"},
-  {"Author": "Mark Twain", "Date": "1889", "Title": "A Connecticut Yankee in King Arthur’s Court"}
+  {"author": "Mark Twain", "date": "1867", "title": "The Celebrated Jumping Frog of Claveras County"},
+  {"author": "Mark Twain", "date": "1876", "title": "The Adventures of Tom Sawyer"},
+  {"author": "Mark Twain", "date": "1882", "title": "The Prince and the Pauper"},
+  {"author": "Mark Twain", "date": "1883", "title": "Life on the Mississippi"},
+  {"author": "Mark Twain", "date": "1884", "title": "Adventures of Huckleberry Finn"},
+  {"author": "Mark Twain", "date": "1889", "title": "A Connecticut Yankee in King Arthur’s Court"}
 ]
