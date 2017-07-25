@@ -1,8 +1,9 @@
 <div class="container">
+  <app-edit-modal></app-edit-modal>
   <h1 class="text-center">Welcome to Zhanna's Library</h1>
-  <ul *ngIf="library != undefined" class="list-group">
-  <li *ngFor="let book of library" class="list-group-item list-group-item-success">
-  <app-book [book]="book"></app-book>
+  <ul class="list-group">
+  <li *ngFor="let book of library | async; let i = index" class="list-group-item list-group-item-success">
+  <app-book [book]="book" [index]="i"></app-book>
   </li>
   </ul>
 </div>

@@ -6,18 +6,24 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
 import { BooksService } from './books.service';
+import { EditModalService } from './edit-modal.service';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { PromptComponent } from './prompt/prompt.component';
+import { PromptService } from './prompt.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent
+    BookComponent,
+    EditModalComponent,
+    PromptComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [BooksService],
+  providers: [BooksService, EditModalService, PromptService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

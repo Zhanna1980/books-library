@@ -8,16 +8,13 @@ import { Book } from './book';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  library: Book[];
+  library = this.booksService.library;
+  showModal=false;
 
   constructor(private booksService: BooksService) {}
 
   ngOnInit () {
-    this.booksService.getBooks().subscribe((response) => {
-      this.library = response;
-    }, (error) => {
-      console.log("error");
-    });;
+  
   }
   
 }

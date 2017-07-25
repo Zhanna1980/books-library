@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class BooksService {
+  _library = this.getBooks();
+  
 
   constructor(private http: Http) { }
 
@@ -15,4 +17,19 @@ export class BooksService {
       });
   }
 
+  get library() {
+    return this._library;
+  }
+
+  editBook() {
+
+  }
+
+  deleteBook() {
+
+  }
+
+  addNewBook() {
+    
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Book } from '../book';
+import { EditModalService } from '../edit-modal.service';
 
 @Component({
   selector: 'app-book',
@@ -8,18 +9,19 @@ import { Book } from '../book';
 })
 export class BookComponent implements OnInit {
   @Input() book: Book;
+  @Input() index: number;
 
-  constructor() { }
+  constructor(private editModalService: EditModalService) { }
 
   ngOnInit() {
   }
 
-  onBoookEditClick(event: Event) {
-
+  onEditBookClick() {
+    this.editModalService.showModal({indexInLibrary: this.index, book: this.book});;
   }
 
-  onBookDeleteClick(event: Event) {
-    console.log(event);
+  onBookDeleteClick() {
+    
   }
 
 }
