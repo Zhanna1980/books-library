@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from './books.service';
 import { Book } from './book';
+import {EditModalService} from './edit-modal.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,19 @@ import { Book } from './book';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  library = this.booksService.library;
   showModal=false;
 
-  constructor(private booksService: BooksService) {}
+  constructor(private booksService: BooksService, private editModalService: EditModalService) {}
 
   ngOnInit () {
   
   }
+
+  get library() {
+    return this.booksService.library;
+  }
   
+  onAddBookClick() {
+    this.editModalService.showModal();
+  }
 }
