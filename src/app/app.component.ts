@@ -20,6 +20,10 @@ export class AppComponent implements OnInit{
   get library() {
     return this.booksService.library;
   }
+
+  get isModalActive() {
+    return this.editModalService.isModalActive;
+  }
   
   onAddBookClick() {
     this.editModalService.showModal();

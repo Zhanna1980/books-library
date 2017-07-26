@@ -17,7 +17,7 @@ export class BookComponent implements OnInit {
   }
 
   onEditBookClick() {
-    this.editModalService.showModal({indexInLibrary: this.index, book: this.book});;
+    this.editModalService.showModal(this.index);;
   }
 
   onBookDeleteClick() {
