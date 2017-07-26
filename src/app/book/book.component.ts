@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Book } from '../book';
 import { EditModalService } from '../edit-modal.service';
+import { PromptService } from '../prompt.service';
 
 @Component({
   selector: 'app-book',
@@ -11,7 +12,7 @@ export class BookComponent implements OnInit {
   @Input() book: Book;
   @Input() index: number;
 
-  constructor(private editModalService: EditModalService) { }
+  constructor(private editModalService: EditModalService, private promptService: PromptService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,7 @@ export class BookComponent implements OnInit {
   }
 
   onBookDeleteClick() {
-    
+    this.promptService.showPrompt(this.index);
   }
 
 }

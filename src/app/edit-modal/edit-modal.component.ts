@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import {EditModalService} from '../edit-modal.service';
 import { BooksService } from '../books.service';
 import { Book } from '../book';
@@ -9,7 +9,7 @@ import {Subscription} from "rxjs";
   templateUrl: './edit-modal.component.html',
   styleUrls: ['./edit-modal.component.css']
 })
-export class EditModalComponent implements OnInit {
+export class EditModalComponent implements OnInit, OnDestroy {
   onChangeModalDataSubscription: Subscription;
   title: String;
   book: Book;
@@ -35,13 +35,6 @@ export class EditModalComponent implements OnInit {
       if (this.onChangeModalDataSubscription) {
         this.onChangeModalDataSubscription.unsubscribe();
       }
-  }
-  get isModalActive() {
-    return this.editModalService.isModalActive;
-  }
-
-  hide() {
-    this.editModalService.hideModal();
   }
 
   saveChanges() {

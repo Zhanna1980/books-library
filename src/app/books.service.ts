@@ -31,6 +31,7 @@ export class BooksService {
 
   deleteBook(indexInLibrary: number) {
     this.library.splice(indexInLibrary, 1);
+    console.log(this.library);
   }
 
   addNewBook() {
