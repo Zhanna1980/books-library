@@ -5,26 +5,39 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
       </div>
+      <form [formGroup]="bookForm">
       <div class="modal-body">
-        <form>
           <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" class="form-control" id="author" [value]="book != undefined ? book.author : ''" required>
+            <input type="text" class="form-control" id="author" formControlName="author">
+            <span *ngIf="!bookForm.get('author').valid && bookForm.get('author').touched"
+              class="help-block bg-danger">
+              <span *ngIf="bookForm.get('author').errors['required']">This field is required!</span>
+              </span>
           </div>
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" [value]="book != undefined ? book.title : ''" required>
+            <input type="text" class="form-control" id="title" formControlName="title">
+            <span *ngIf="!bookForm.get('title').valid && bookForm.get('title').touched"
+              class="help-block bg-danger">
+              <span *ngIf="bookForm.get('title').errors['required']">This field is required!</span>
+              <span *ngIf="bookForm.get('title').errors['sameBookName']">There is a book with the same title in the library</span>
+              </span>
           </div>
           <div class="form-group">
             <label for="date">Date</label>
-            <input type="text" class="form-control" id="date" [value]="book != undefined ? book.date : ''" required>
+            <input type="text" class="form-control" id="date" formControlName="date">
+            <span *ngIf="!bookForm.get('date').valid && bookForm.get('date').touched"
+              class="help-block bg-danger">
+              <span *ngIf="bookForm.get('date').errors['required']">This field is required!</span>
+              </span>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveChanges()">Save changes</button>
+        <button type="button" (click)="saveChanges()" data-dismiss="modal" class="btn btn-primary" [disabled]="!bookForm.valid">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

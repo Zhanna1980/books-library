@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from "@angular/http";
-import {Observable} from "rxjs";
+import { Http, Response } from "@angular/http";
+import { Observable } from "rxjs";
 import { Book } from './book';
 
 @Injectable()
 export class BooksService {
-  library: Book[];
-  
-  constructor(private http: Http) { 
+  library: Book[] = [];
+
+  constructor(private http: Http) {
     this.getBooks();
   }
 
@@ -25,31 +25,32 @@ export class BooksService {
     return this.library[indexInLibrary];
   }
 
-  editBook(indexInLibrary: number, editedAuthor: string, editedTitle: string, editedDate: string): void {
-    this.library[indexInLibrary].author = editedAuthor;
-    this.library[indexInLibrary].title = editedTitle;
-    this.library[indexInLibrary].date = editedDate; 
+  addEditBook(book: Book, indexInLibrary?: number): void {
+    if (indexInLibrary >= 0 && indexInLibrary < this.library.length) {
+      this.library[indexInLibrary] = book;
+    } else {
+      this.library.push(book);
+    }
   }
 
   deleteBook(indexInLibrary: number): void {
     this.library.splice(indexInLibrary, 1);
   }
 
-  addNewBook(author: string, title: string, date: string):void {
-    this.library.push({
-      "author": author,
-      "title": title,
-      "date": date
-    });
-  }
+  titleAlreadyExists(title: string, indexInLibrary?: number): number {
+    if (!title) {
+      return -1;
+    }
 
-  titleAlreadyExists(title: string): boolean {
     for (var i = 0; i < this.library.length; i++) {
-      if (this.library[i].title === title) {
-        return true;
+      if (indexInLibrary !== undefined && indexInLibrary === i) {
+        continue;
+      }
+      if (this.library[i].title.toLowerCase() === title.toLowerCase()) {
+        return i;
       }
     }
-    return false;
+    return -1;
   }
 
 }

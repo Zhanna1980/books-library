@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
-import {EditModalService} from '../edit-modal.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EditModalService } from '../edit-modal.service';
 import { BooksService } from '../books.service';
 import { Book } from '../book';
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-edit-modal',
@@ -11,6 +13,7 @@ import {Subscription} from "rxjs";
 })
 export class EditModalComponent implements OnInit, OnDestroy {
   onChangeModalDataSubscription: Subscription;
+  bookForm: FormGroup;
   title: String;
   book: Book;
   indexInLibrary: number;
@@ -28,17 +31,39 @@ export class EditModalComponent implements OnInit, OnDestroy {
         this.indexInLibrary = undefined;
         this.title = "Add a new book";
       }
+      this.patchValuesToForm();
+    });
+    this.bookForm = new FormGroup({
+      'author': new FormControl(null, [Validators.required]),
+      'title': new FormControl(null, [Validators.required, this.sameBookName.bind(this)]),
+      'date': new FormControl(null, [Validators.required])
+    });
+  }
+
+  patchValuesToForm() {
+    this.bookForm.reset();
+    this.bookForm.patchValue({
+      "author": this.indexInLibrary !== undefined ? this.book.author : "",
+      "title": this.indexInLibrary !== undefined ? this.book.title : "",
+      "date": this.indexInLibrary !== undefined ? this.book.date : ""
     });
   }
 
   ngOnDestroy() {
-      if (this.onChangeModalDataSubscription) {
-        this.onChangeModalDataSubscription.unsubscribe();
-      }
+    if (this.onChangeModalDataSubscription) {
+      this.onChangeModalDataSubscription.unsubscribe();
+    }
   }
 
   saveChanges() {
+    this.booksService.addEditBook(this.bookForm.value, this.indexInLibrary);
+  }
 
+  sameBookName(control: FormControl): { [s: string]: boolean } {
+    if (this.booksService.titleAlreadyExists(control.value, this.indexInLibrary) !== -1) {
+      return { 'sameBookName': true };
+    }
+    return null;
   }
 
 }
