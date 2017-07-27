@@ -11,7 +11,7 @@ export class BooksService {
     this.getBooks();
   }
 
-  getBooks() {
+  getBooks(): void {
     this.http.get("./books.json")
       .map((data: Response) => { return data.json(); })
       .catch((err: Response) => {
@@ -26,15 +26,30 @@ export class BooksService {
   }
 
   editBook(indexInLibrary: number, editedAuthor: string, editedTitle: string, editedDate: string): void {
-
+    this.library[indexInLibrary].author = editedAuthor;
+    this.library[indexInLibrary].title = editedTitle;
+    this.library[indexInLibrary].date = editedDate; 
   }
 
-  deleteBook(indexInLibrary: number) {
+  deleteBook(indexInLibrary: number): void {
     this.library.splice(indexInLibrary, 1);
-    console.log(this.library);
   }
 
-  addNewBook() {
-    
+  addNewBook(author: string, title: string, date: string):void {
+    this.library.push({
+      "author": author,
+      "title": title,
+      "date": date
+    });
   }
+
+  titleAlreadyExists(title: string): boolean {
+    for (var i = 0; i < this.library.length; i++) {
+      if (this.library[i].title === title) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
