@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {PromptService} from '../prompt.service';
+import { PromptService } from '../prompt.service';
 import { BooksService } from '../books.service';
 import { Book } from '../book';
-import {Subscription} from "rxjs";
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-prompt',
@@ -18,7 +18,7 @@ export class PromptComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onChangePromptDataSubscription = this.promptService.onChangePromptData.subscribe((indexInLibrary) => {
-      if (indexInLibrary != undefined) {
+      if (indexInLibrary !== undefined) {
         this.indexInLibrary = indexInLibrary;
         this.book = this.booksService.getBookByIndex(this.indexInLibrary);
       }
@@ -30,7 +30,7 @@ export class PromptComponent implements OnInit, OnDestroy {
       this.onChangePromptDataSubscription.unsubscribe();
     }
   }
-  
+
   deleteBook() {
     this.booksService.deleteBook(this.indexInLibrary);
   }

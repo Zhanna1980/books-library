@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs/Subject";
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class EditModalService {
-    onChangeModalData: Subject<number | undefined>;
+  onChangeModalData: Subject<number | undefined>;
 
-    constructor() { 
-      this.onChangeModalData = new Subject();
-    }
+  constructor() {
+    this.onChangeModalData = new Subject();
+  }
 
-    showModal(editBookModalData?: number) {
-      this.onChangeModalData.next(editBookModalData);
-    }
+  showModal(editBookModalData?: number) {
+    this.onChangeModalData.next(editBookModalData);
+  }
 }

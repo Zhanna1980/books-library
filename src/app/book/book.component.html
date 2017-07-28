@@ -1,8 +1,8 @@
 <div class="row">
-  <img src="../assets/Books-aj.svg_aj_ashton_01f.png" alt="An image of two books" class="col-sm-2 col-md-2 col-lg-2"/>
+  <img src="../assets/Books-aj.svg_aj_ashton_01f.png" alt="An image of two books" class="col-sm-2 col-md-2 col-lg-2" />
   <div class="col-sm-10 col-md-10 col-lg-10">
     <h3>{{book.author}}</h3>
-    <p class="lead">{{book.title}}</p>
+    <p class="lead">{{book.title | bookName}}</p>
     <p>{{book.date}}</p>
   </div>
 </div>

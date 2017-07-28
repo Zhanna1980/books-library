@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
-import { Observable } from "rxjs";
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 import { Book } from './book';
 
 @Injectable()
@@ -12,10 +13,10 @@ export class BooksService {
   }
 
   getBooks(): void {
-    this.http.get("./books.json")
+    this.http.get('./books.json')
       .map((data: Response) => { return data.json(); })
       .catch((err: Response) => {
-        return Observable.throw("Failed to fetch data.");
+        return Observable.throw('Failed to fetch data.');
       }).subscribe(data => {
         this.library = data as Book[];
       });
@@ -37,20 +38,15 @@ export class BooksService {
     this.library.splice(indexInLibrary, 1);
   }
 
-  titleAlreadyExists(title: string, indexInLibrary?: number): number {
-    if (!title) {
-      return -1;
+  titleAlreadyExists(newTitle: string, ignoreIndex?: number): boolean {
+    if (!newTitle) {
+      return false;
     }
 
-    for (var i = 0; i < this.library.length; i++) {
-      if (indexInLibrary !== undefined && indexInLibrary === i) {
-        continue;
-      }
-      if (this.library[i].title.toLowerCase() === title.toLowerCase()) {
-        return i;
-      }
-    }
-    return -1;
+    newTitle = newTitle.toLowerCase();
+    return this.library.reduce((acc, value, currentIndex) => {
+      return acc || (ignoreIndex !== currentIndex && value.title.toLowerCase() === newTitle);
+    }, false);
   }
 
 }
