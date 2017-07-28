@@ -29,7 +29,7 @@ export class BooksService {
     if (indexInLibrary >= 0 && indexInLibrary < this.library.length) {
       this.library[indexInLibrary] = book;
     } else {
-      this.library.push(book);
+      this.library.unshift(book);
     }
   }
 

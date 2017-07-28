@@ -10,6 +10,7 @@ import { EditModalService } from './edit-modal.service';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { PromptComponent } from './prompt/prompt.component';
 import { PromptService } from './prompt.service';
+import { BookNamePipe } from './book-name.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PromptService } from './prompt.service';
     BookComponent,
     EditModalComponent,
     PromptComponent,
+    BookNamePipe,
   ],
   imports: [
     BrowserModule,

@@ -36,7 +36,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
     this.bookForm = new FormGroup({
       'author': new FormControl(null, [Validators.required]),
       'title': new FormControl(null, [Validators.required, this.sameBookName.bind(this)]),
-      'date': new FormControl(null, [Validators.required])
+      'date': new FormControl(null, [Validators.required, this.dateValidation])
     });
   }
 
@@ -61,9 +61,28 @@ export class EditModalComponent implements OnInit, OnDestroy {
 
   sameBookName(control: FormControl): { [s: string]: boolean } {
     if (this.booksService.titleAlreadyExists(control.value, this.indexInLibrary) !== -1) {
-      return { 'sameBookName': true };
+      return { "sameBookName": true };
     }
     return null;
   }
+
+  dateValidation(control: FormControl): { [s: string]: boolean } {
+    if (control.value == undefined) {
+      return null;
+    }
+    if (control.value > new Date().getFullYear() || control.value < 0) {
+      return { "unvalidYear": true };
+    }
+    return null;
+  }
+
+  controlHasError(formControlName: string, errorName: string) {
+    return this.bookForm.get(formControlName).errors[errorName];
+  }
+
+  isControlUnvalid(formControlName: string) {
+    return !this.bookForm.get(formControlName).valid && (this.bookForm.get(formControlName).touched || this.bookForm.get(formControlName).dirty);
+  }
+
 
 }

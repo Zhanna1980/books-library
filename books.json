@@ -1,8 +1,37 @@
 [
-  {"author": "Mark Twain", "date": "1867", "title": "The Celebrated Jumping Frog of Calaveras County"},
-  {"author": "Mark Twain", "date": "1876", "title": "The Adventures of Tom Sawyer"},
-  {"author": "Mark Twain", "date": "1882", "title": "The Prince and the Pauper"},
-  {"author": "Mark Twain", "date": "1883", "title": "Life on the Mississippi"},
-  {"author": "Mark Twain", "date": "1884", "title": "Adventures of Huckleberry Finn"},
-  {"author": "Mark Twain", "date": "1889", "title": "A Connecticut Yankee in King Arthur’s Court"}
+  {
+    "author": "Unknown",
+    "date": "2017",
+    "title": "@@THIS is a BooK!!"
+  },
+  {
+    "author": "Mark Twain",
+    "date": "1867",
+    "title": "The Celebrated Jumping Frog of Calaveras County"
+  },
+  {
+    "author": "Mark Twain",
+    "date": "1876",
+    "title": "The Adventures of Tom Sawyer"
+  },
+  {
+    "author": "Mark Twain",
+    "date": "1882",
+    "title": "The Prince and the Pauper"
+  },
+  {
+    "author": "Mark Twain",
+    "date": "1883",
+    "title": "Life on the Mississippi"
+  },
+  {
+    "author": "Mark Twain",
+    "date": "1884",
+    "title": "Adventures of Huckleberry Finn"
+  },
+  {
+    "author": "Mark Twain",
+    "date": "1889",
+    "title": "A Connecticut Yankee in King Arthur’s Court"
+  }
 ]
