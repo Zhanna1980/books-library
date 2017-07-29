@@ -1,13 +1,16 @@
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="deleteBookPromptLabel" id="deleteBookPrompt">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="prompt">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content" *ngIf="book != undefined">
-      <div class="modal-header bg-success">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete book</h4>
       </div>
-      <div class="modal-body bg-success">
-        <h4 class="text-center">Delete <strong class="text-primary">{{book.title}}</strong> by <strong class="text-primary">{{book.author}}</strong>?</h4>
+      <div class="modal-body">
+        <h4 class="text-left">Are you sure you want to remove
+          <strong class="text-primary">{{book.title}}</strong> by
+          <strong class="text-primary">{{book.author}}</strong> from library?</h4>
       </div>
-      <div class="modal-footer bg-success">
+      <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteBook()">Delete</button>
       </div>

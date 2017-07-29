@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BooksService } from './books.service';
 import { Book } from './book';
-import { EditModalService } from './edit-modal.service';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,13 @@ import { EditModalService } from './edit-modal.service';
 export class AppComponent {
   showModal = false;
 
-  constructor(private booksService: BooksService, private editModalService: EditModalService) { }
+  constructor(private booksService: BooksService, private modalService: ModalService) { }
 
   get library() {
     return this.booksService.library;
   }
 
   onAddBookClick() {
-    this.editModalService.showModal();
+    this.modalService.showAddEditModal();
   }
 }

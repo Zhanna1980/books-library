@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PromptService } from '../prompt.service';
+import { ModalService } from '../modal.service';
 import { BooksService } from '../books.service';
 import { Book } from '../book';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,10 +14,10 @@ export class PromptComponent implements OnInit, OnDestroy {
   book: Book;
   indexInLibrary: number;
 
-  constructor(private booksService: BooksService, private promptService: PromptService) { }
+  constructor(private booksService: BooksService, private modalService: ModalService) { }
 
   ngOnInit() {
-    this.onChangePromptDataSubscription = this.promptService.onChangePromptData.subscribe((indexInLibrary) => {
+    this.onChangePromptDataSubscription = this.modalService.onChangePromptData.subscribe((indexInLibrary) => {
       if (indexInLibrary !== undefined) {
         this.indexInLibrary = indexInLibrary;
         this.book = this.booksService.getBookByIndex(this.indexInLibrary);

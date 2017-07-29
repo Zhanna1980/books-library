@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EditModalService } from '../edit-modal.service';
+import { ModalService } from '../modal.service';
 import { BooksService } from '../books.service';
 import { Book } from '../book';
 import { Subscription } from 'rxjs/Subscription';
@@ -18,21 +18,25 @@ export class EditModalComponent implements OnInit, OnDestroy {
   book: Book;
   indexInLibrary: number;
 
-  constructor(private editModalService: EditModalService, private booksService: BooksService) { }
+  constructor(private modalService: ModalService, private booksService: BooksService) { }
 
   ngOnInit() {
-    this.onChangeModalDataSubscription = this.editModalService.onChangeModalData.subscribe((modalData) => {
+    this.onChangeModalDataSubscription = this.modalService.onChangeAddEditModalData.subscribe((modalData) => {
+      // edit book
       if (modalData !== undefined) {
         this.indexInLibrary = modalData;
         this.book = this.booksService.getBookByIndex(this.indexInLibrary);
         this.title = 'Editing the book';
-      } else {
+      }
+      // new book
+      else {
         this.book = undefined;
         this.indexInLibrary = undefined;
         this.title = 'Add a new book';
       }
       this.patchValuesToForm();
     });
+
     this.bookForm = new FormGroup({
       'author': new FormControl(null, [Validators.required]),
       'title': new FormControl(null, [Validators.required, this.sameBookName.bind(this)]),
@@ -42,10 +46,12 @@ export class EditModalComponent implements OnInit, OnDestroy {
 
   patchValuesToForm() {
     this.bookForm.reset();
+
+    const existingBook = this.indexInLibrary !== undefined;
     this.bookForm.patchValue({
-      'author': this.indexInLibrary !== undefined ? this.book.author : '',
-      'title': this.indexInLibrary !== undefined ? this.book.title : '',
-      'date': this.indexInLibrary !== undefined ? this.book.date : ''
+      'author': existingBook ? this.book.author : '',
+      'title': existingBook ? this.book.title : '',
+      'date': existingBook ? parseInt(this.book.date) : ''
     });
   }
 
@@ -59,6 +65,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
     this.booksService.addEditBook(this.bookForm.value, this.indexInLibrary);
   }
 
+  // Checks if book with same name already exists in the library
   sameBookName(control: FormControl): { [s: string]: boolean } {
     if (this.booksService.titleAlreadyExists(control.value, this.indexInLibrary)) {
       return { 'sameBookName': true };
@@ -70,8 +77,11 @@ export class EditModalComponent implements OnInit, OnDestroy {
     if (control.value === undefined) {
       return null;
     }
+    if (typeof control.value != 'number') {
+      return { 'invalidYear': true };
+    }
     if (control.value > new Date().getFullYear() || control.value < 0) {
-      return { 'unvalidYear': true };
+      return { 'invalidYear': true };
     }
     return null;
   }
@@ -80,7 +90,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
     return this.bookForm.get(formControlName).errors[errorName];
   }
 
-  isControlUnvalid(formControlName: string) {
+  isControlInvalid(formControlName: string) {
     const control = this.bookForm.get(formControlName);
     return !control.valid && (control.touched || control.dirty);
   }

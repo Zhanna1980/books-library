@@ -1,23 +1,23 @@
 <div class="modal fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="addEditModalLabel">
   <div class="modal-dialog text-primary bg-success" role="document">
     <div class="modal-content">
-      <div class="modal-header bg-success">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
       </div>
       <form [formGroup]="bookForm">
-        <div class="modal-body bg-success">
+        <div class="modal-body">
           <div class="form-group">
             <label for="author">Author</label>
             <input type="text" class="form-control" id="author" formControlName="author">
-            <span *ngIf="isControlUnvalid('author')" class="help-block bg-danger">
+            <span *ngIf="isControlInvalid('author')" class="help-block bg-danger">
               <span *ngIf="controlHasError('author', 'required')">This field is required!</span>
             </span>
           </div>
           <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" formControlName="title">
-            <span *ngIf="isControlUnvalid('title')" class="help-block bg-danger">
+            <span *ngIf="isControlInvalid('title')" class="help-block">
               <span *ngIf="controlHasError('title','required')">This field is required!</span>
             <span *ngIf="controlHasError('title', 'sameBookName')">There is a book with the same title in the library</span>
             </span>
@@ -25,13 +25,13 @@
           <div class="form-group">
             <label for="date">Year</label>
             <input type="number" class="form-control" id="date" formControlName="date">
-            <span *ngIf="isControlUnvalid('date')" class="help-block bg-danger">
+            <span *ngIf="isControlInvalid('date')" class="help-block bg-danger">
               <span *ngIf="controlHasError('date','required')">This field is required!</span>
-            <span *ngIf="controlHasError('date','unvalidYear')">Please enter correct year of publishing. For example, <em>1950</em></span>
+            <span *ngIf="controlHasError('date','invalidYear')">Please enter correct year of publishing. For example, <em>1950</em></span>
             </span>
           </div>
         </div>
-        <div class="modal-footer bg-success">
+        <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" (click)="saveChanges()" data-dismiss="modal" class="btn btn-primary" [disabled]="!bookForm.valid">Save changes</button>
         </div>

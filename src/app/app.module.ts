@@ -6,10 +6,9 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
 import { BooksService } from './books.service';
-import { EditModalService } from './edit-modal.service';
+import { ModalService } from './modal.service';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { PromptComponent } from './prompt/prompt.component';
-import { PromptService } from './prompt.service';
 import { BookNamePipe } from './book-name.pipe';
 
 @NgModule({
@@ -25,7 +24,7 @@ import { BookNamePipe } from './book-name.pipe';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [BooksService, EditModalService, PromptService],
+  providers: [BooksService, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
