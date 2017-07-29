@@ -1,12 +1,12 @@
 <div class="modal fade" id="addEditModal" tabindex="-1" role="dialog" aria-labelledby="addEditModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog text-primary bg-success" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-success">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
       </div>
       <form [formGroup]="bookForm">
-        <div class="modal-body">
+        <div class="modal-body bg-success">
           <div class="form-group">
             <label for="author">Author</label>
             <input type="text" class="form-control" id="author" formControlName="author">
@@ -31,7 +31,7 @@
             </span>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer bg-success">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" (click)="saveChanges()" data-dismiss="modal" class="btn btn-primary" [disabled]="!bookForm.valid">Save changes</button>
         </div>

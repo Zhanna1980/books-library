@@ -44,8 +44,8 @@ export class BooksService {
     }
 
     newTitle = newTitle.toLowerCase();
-    return this.library.reduce((acc, value, currentIndex) => {
-      return acc || (ignoreIndex !== currentIndex && value.title.toLowerCase() === newTitle);
+    return this.library.reduce((found, value, currentIndex) => {
+      return found || (ignoreIndex !== currentIndex && value.title.toLowerCase() === newTitle);
     }, false);
   }
 
