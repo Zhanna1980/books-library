@@ -13,5 +13,6 @@ html {
 }
 
 .scroll-wrapper {
-    overflow: scroll; height: 100%;
+    overflow: auto;
+    height: 100%;
 }
